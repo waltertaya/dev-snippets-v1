@@ -2,6 +2,26 @@ package main
 
 import "fmt"
 
+type Cars struct {
+	Make string
+	Model string
+	Engine string
+	Price int
+}
+
+// Nested struct
+type Person struct {
+	Name string
+	Age int
+	Address Address
+}
+
+type Address struct {
+	Street string
+	City string
+	State string
+}
+
 func main() {
 	dataType()
 	formaatting_string()
@@ -16,6 +36,14 @@ func main() {
 
 	x, y := getCoords()
 	fmt.Println(x, y)
+
+	car1 := Cars{"Toyota", "Corolla", "VVT-i", 2000000}
+	fmt.Println(car1)
+	fmt.Println(car1.Make)
+
+	// Nested struct
+	person1 := Person{"Walter", 36, Address{"123 Main St", "Nairobi", "Nairobi"}}
+	fmt.Println(person1)
 }
 
 func dataType() {
