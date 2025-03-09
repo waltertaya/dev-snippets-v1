@@ -7,6 +7,15 @@ func main() {
 	formaatting_string()
 	condition_statements()
 	fmt.Println(sub(12, 2, "Subtracting"))
+
+	// firstName, lastName := getNames()
+	// fmt.Println("Welcome", firstName, lastName)
+
+	firstName, _ := getNames()
+	fmt.Println("Welcome", firstName)
+
+	x, y := getCoords()
+	fmt.Println(x, y)
 }
 
 func dataType() {
@@ -57,4 +66,13 @@ func condition_statements() {
 func sub(x, y int, message string) int {
 	fmt.Println(message)
 	return x -y
+}
+
+func getNames() (string, string) {
+	return "Walter", "Taya"
+}
+
+func getCoords() (x, y int) {
+	// x and y are initialized with zero values
+	return // automatically return x and y
 }
