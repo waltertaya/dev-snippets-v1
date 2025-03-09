@@ -10,16 +10,36 @@ type Cars struct {
 }
 
 // Nested struct
+// type Person struct {
+// 	Name string
+// 	Age int
+// 	Address Address
+// }
+
+// type Address struct {
+// 	Street string
+// 	City string
+// 	State string
+// }
+
 type Person struct {
 	Name string
 	Age int
-	Address Address
+	Address struct {
+		Street string
+		City string
+		State string
+	}
+}
+// Methods for struct
+func (c Cars) carDetails() string {
+	return fmt.Sprintf("Car: %v %v, Engine: %v, Price: %v", c.Make, c.Model, c.Engine, c.Price)
 }
 
-type Address struct {
-	Street string
-	City string
-	State string
+// Embedding struct
+type truck struct {
+	Cars
+	Price int
 }
 
 func main() {
@@ -41,9 +61,24 @@ func main() {
 	fmt.Println(car1)
 	fmt.Println(car1.Make)
 
+	// Methods for struct
+	fmt.Println(car1.carDetails())
+
 	// Nested struct
-	person1 := Person{"Walter", 36, Address{"123 Main St", "Nairobi", "Nairobi"}}
+	// person1 := Person{"Walter", 36, Address{"123 Main St", "Nairobi", "Nairobi"}}
+	// fmt.Println(person1)
+	person1 := Person{"Walter", 36, struct{Street string; City string; State string}{"123 Main St", "Nairobi", "Nairobi"}}
 	fmt.Println(person1)
+
+	// Anonymous struct
+	anon := struct {
+		Name string
+		Age int
+	}{
+		Name: "Taya",
+		Age: 36,
+	}
+	fmt.Println(anon)
 }
 
 func dataType() {
