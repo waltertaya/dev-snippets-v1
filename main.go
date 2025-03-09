@@ -6,6 +6,7 @@ func main() {
 	dataType()
 	formaatting_string()
 	condition_statements()
+	fmt.Println(sub(12, 2, "Subtracting"))
 }
 
 func dataType() {
@@ -48,4 +49,12 @@ func condition_statements() {
 	} else {
 		fmt.Println("You are adult")
 	}
+}
+
+// func sub(x int, y int) int {
+// 	return x -y
+// }
+func sub(x, y int, message string) int {
+	fmt.Println(message)
+	return x -y
 }
