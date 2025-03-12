@@ -102,3 +102,17 @@ func UpdateEmployee(c *gin.Context) {
 		"employee": employee,
 	})
 }
+
+func DeleteEmployee(c *gin.Context) {
+	// Fetch employee by id
+	var employee models.Employees
+	initializers.DB.First(&employee, c.Param("id"))
+
+	// Delete employee
+	initializers.DB.Delete(&employee)
+
+	// Return
+	c.JSON(200, gin.H{
+		"employee": employee,
+	})
+}

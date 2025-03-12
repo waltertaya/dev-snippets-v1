@@ -30,5 +30,8 @@ func main() {
 	// PUT employee
 	router.PUT("/employees/:id", controllers.UpdateEmployee)
 
+	// DELETE employee
+	router.DELETE("/employees/:id", controllers.DeleteEmployee)
+
 	router.Run()
 }
