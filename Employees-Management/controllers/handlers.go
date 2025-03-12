@@ -66,3 +66,39 @@ func GetEmployee(c *gin.Context) {
 		"employee": employee,
 	})
 }
+
+func UpdateEmployee(c *gin.Context) {
+	// Fetch json data send
+	var body struct {
+		FirstName string
+		LastName string
+		Email string
+		ContactNumber string
+		Age int
+		Dob string
+		Salary int
+		Address string
+	}
+	c.Bind(&body)
+
+	// Fetch employee by id
+	var employee models.Employees
+	initializers.DB.First(&employee, c.Param("id"))
+
+	// Update employee
+	employee.FirstName = body.FirstName
+	employee.LastName = body.LastName
+	employee.Email = body.Email
+	employee.ContactNumber = body.ContactNumber
+	employee.Age = body.Age
+	employee.Dob = body.Dob
+	employee.Salary = body.Salary
+	employee.Address = body.Address
+
+	initializers.DB.Save(&employee)
+
+	// Return
+	c.JSON(200, gin.H{
+		"employee": employee,
+	})
+}
