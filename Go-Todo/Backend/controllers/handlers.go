@@ -6,13 +6,6 @@ import (
 	"github.com/waltertaya/Todo/models"
 )
 
-// type Task struct {
-// 	gorm.Model
-// 	UserId int
-// 	Title string
-// 	Complete bool
-// }
-
 func RegisterUser(ctx *gin.Context) {
 	var body struct {
 		Username string
@@ -48,14 +41,14 @@ func LoginUser(ctx *gin.Context) {
 
 	user := models.User{}
 
-	result := initializers.DB.Where("email = ? AND password = ?", body.Username, body.Password).First(&user)
+	result := initializers.DB.Where("username = ? AND password = ?", body.Username, body.Password).First(&user)
 
 	if result.Error != nil {
 		ctx.JSON(500, gin.H{"error": "Invalid credentials"})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"message": "User logged in successfully"})
+	ctx.JSON(202, gin.H{"user": user})
 }
 
 func CreateTask(ctx *gin.Context) {
@@ -78,7 +71,7 @@ func CreateTask(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(200, gin.H{"message": "Task created successfully"})
+	ctx.JSON(201, gin.H{"message": "Task created successfully"})
 }
 
 func UpdateTask(ctx *gin.Context) {
@@ -115,7 +108,7 @@ func DeleteTask(ctx *gin.Context) {
 		return
 	}
 	initializers.DB.Delete(&task)
-	ctx.JSON(200, gin.H{"message": "Task deleted successfully"})
+	ctx.JSON(204, gin.H{"message": "Task deleted successfully"})
 }
 
 func GetTasks(ctx *gin.Context) {
