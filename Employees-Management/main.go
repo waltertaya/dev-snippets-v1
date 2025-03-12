@@ -21,5 +21,8 @@ func main() {
 	// POST employees
 	router.POST("/employees", controllers.PostEmployees)
 
+	// GET employees
+	router.GET("/employees", controllers.GetEmployees)
+
 	router.Run()
 }

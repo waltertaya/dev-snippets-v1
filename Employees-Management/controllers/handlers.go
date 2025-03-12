@@ -44,3 +44,14 @@ func PostEmployees(c *gin.Context) {
 		"employee": employee,
 	})
 }
+
+func GetEmployees(c *gin.Context) {
+	// Fetch all employees
+	var employees []models.Employees
+	initializers.DB.Find(&employees)
+
+	// Return
+	c.JSON(200, gin.H{
+		"employees": employees,
+	})
+}
