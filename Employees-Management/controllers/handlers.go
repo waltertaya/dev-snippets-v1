@@ -55,3 +55,14 @@ func GetEmployees(c *gin.Context) {
 		"employees": employees,
 	})
 }
+
+func GetEmployee(c *gin.Context) {
+	// Fetch employee by id
+	var employee models.Employees
+	initializers.DB.First(&employee, c.Param("id"))
+
+	// Return
+	c.JSON(200, gin.H{
+		"employee": employee,
+	})
+}

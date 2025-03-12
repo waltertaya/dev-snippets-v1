@@ -24,5 +24,8 @@ func main() {
 	// GET employees
 	router.GET("/employees", controllers.GetEmployees)
 
+	// GET employee
+	router.GET("/employees/:id", controllers.GetEmployee)
+
 	router.Run()
 }
