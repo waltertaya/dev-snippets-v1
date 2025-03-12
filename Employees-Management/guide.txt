@@ -1,0 +1,56 @@
+install Go
+- How a workspace looks in practice
+```
+bin/
+	hello					# command executable
+	outyet					# command executable
+src/
+	golang.org/x/example/
+		.git/				# Git repository metadata
+		hello/
+			hello.go		# command source
+		outyet/
+			main.go			# command source
+			main_test.go		# test source
+		stringutil/
+			reverse.go		# package source
+			reverse_test.go		# test source
+	golang.org/x/image
+		.git/				# Git repository metadata
+		bmp/
+			reader.go		# package source
+			writer.go		# package source
+
+cd go/
+cd src/
+cd gitHub.com/
+cd waltertaya/
+mkdir project_name
+
+cd project_name/
+code . (vscode)
+
+go mod init
+
+install vscode go extension
+
+- install daemon (restarting server incase of any changes)
+	go install github.com/githubnemo/CompileDaemon@latest
+
+- Download and install dotenv (hide program variables)
+	go get github.com/joho/godotenv
+
+- Install Gin Web Framework
+	go get -u github.com/gin-gonic/gin
+
+- Install Gorm library (ORM)
+	go get -u gorm.io/gorm
+// Driver install for db
+	go get -u gorm.io/driver/postgres # for psql
+	go get -u gorm.io/driver/sqlite # for SQLite
+	etc
+
+create main.go (package main)
+
+- Using daemon
+	CompileDaemon -command="./project_name"
