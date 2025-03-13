@@ -7,6 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/waltertaya/Todo/controllers"
 	"github.com/waltertaya/Todo/initializers"
+
+	"github.com/gin-contrib/cors"
+    "time"
 )
 
 func init() {
@@ -19,6 +22,14 @@ func main() {
 	router := gin.Default()
 
 	fmt.Printf("Starting the server at: http://localhost:%s", os.Getenv("PORT"))
+
+	router.Use(cors.New(cors.Config{
+        AllowOrigins:     []string{"http://localhost:5173"}, // Allow frontend origin
+        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+        AllowCredentials: true,
+        MaxAge:           12 * time.Hour,
+    }))
 
 	// Create user
 	router.POST("/api/v1/register", controllers.RegisterUser)

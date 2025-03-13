@@ -21,6 +21,13 @@ func RegisterUser(ctx *gin.Context) {
 		Password: body.Password,
 	}
 
+	user_exist := initializers.DB.Where("username = ? OR email = ?", body.Username, body.Email).First(&user)
+
+	if user_exist.RowsAffected > 0 {
+		ctx.JSON(500, gin.H{"error": "User already exists"})
+		return
+	}
+
 	result := initializers.DB.Create(&user)
 
 	if result.Error != nil {
@@ -28,7 +35,7 @@ func RegisterUser(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(200, gin.H{"message": "User created successfully"})
+	ctx.JSON(201, gin.H{"message": "User created successfully"})
 }
 
 func LoginUser(ctx *gin.Context) {
