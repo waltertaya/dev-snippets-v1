@@ -1,28 +1,27 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func main() {
-
-	filename := os.Args[1]
-
-	f, err := os.Open(filename)
-
-	if err != nil {
-		fmt.Printf("Error opening the file: %v", err)
+	counts := make(map[string]int)
+	for _, filename := range os.Args[1:] {
+		data, err := ioutil.ReadFile(filename)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "dup3: %v\n", err)
+			continue
+		}
+		for _, line := range strings.Split(string(data), "\n") {
+			counts[line]++
+		}
 	}
-
-	input := bufio.NewScanner(f)
-	count := make(map[string]int)
-
-	for input.Scan() {
-		line := input.Text()
-		// fmt.Println(line)
-		count[line]++
+	for line, n := range counts {
+		if n > 1 {
+			fmt.Printf("%d\t%s\n", n, line)
+		}
 	}
-	fmt.Println(count)
 }
